@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <title>Zinsberechnung</title>
+    <link rel="stylesheet" href="/themes/css/style.css">
+    <script type="text/javascript" src="/scripts/vendor/vue.min.js"></script>
+    <script type="text/javascript" src="/scripts/vendor/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      
+      <div class="errorMessage" v-if="errorFields.length > 0">
+        Bitte f&uuml;llen Sie alle rot markierten Bereiche korrekt aus.
+        Dabei sind alle Felder Pflichtfelder.
+        <br><br>
+        Der Betrag der Forderung und der Zinssatz d&uuml;rfen nicht negativ sein.
+        <br><br>
+        Soll&auml;nderungen k&ouml;nnen sowohl positiv (Sollzugang) als auch negativ (Sollabgang) sein.
+        <br>
+        Negative Zahlungen werden als Stornierungen gewertet.
+      </div>
+
+      <div class="infoMessage" v-if="result">
+        Das Ergebnis der Zinsberechnung ist: {{result}}
+      </div>
+      
+      <button v-on:click="clickBerechnen">Berechnen</button>
+      <h1>Forderung</h1>
+      <input class="w3" id="forderung_betrag" placeholder="Betrag" step=".01" type="number" v-model="model.betrag" />
+      <input class="w3" id="forderung_datum" placeholder="F&auml;lligkeit" type="date" v-model="model.datum" />
+      <input class="w3" id="forderung_zinssatz" placeholder="Zinssatz" step=".01" type="number" v-model="model.zinssatz" />
+      <br>
+
+      <div class="head">
+         <button class="add" title="Neue Zahlung hinzuf&uuml;gen" v-on:click="addZahlung"></button>
+         <h2>Zahlungen</h2>
+      </div>
+      <div class="items" v-for="(zahlung, index) in model.zahlungen" v-bind:id="getIdZahlung(index)">
+        <div class="number">{{index + 1}}.</div>
+        <input class="w3" placeholder="Betrag" step=".01" type="number" v-model="model.zahlungen[index].betrag" />
+        <input class="w3" placeholder="F&auml;lligkeit" type="date" v-model="model.zahlungen[index].datum" />
+        <button class="delete" title="Diese Zahlung l&ouml;schen" v-on:click="deleteZahlung(index)"></button>
+        <br>
+      </div>
+
+      <div class="head">
+         <button class="add" v-on:click="addSollaenderung" title="Neue Soll&auml;nderung hinzuf&uuml;gen"></button>
+         <h2>Soll&auml;nderungen</h2>
+      </div>
+      <div v-for="(sollaenderung, index) in model.sollaenderungen" v-bind:id="getIdSollaenderung(index)">
+        <div class="number">{{index + 1}}.</div>
+        <input class="w3" placeholder="Betrag" step=".01" type="number" v-model="model.sollaenderungen[index].betrag" />
+        <input class="w3" placeholder="F&auml;lligkeit" type="date" v-model="model.sollaenderungen[index].datum" />
+        <button class="delete" title="Diese Soll&auml;nderung l&ouml;schen" v-on:click="deleteSollaenderung(index)"></button>
+        <br>
+      </div>
+    </div>
+  </body>
+  <script src="/scripts/index.js"></script>
+</html>

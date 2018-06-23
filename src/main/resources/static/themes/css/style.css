@@ -1,0 +1,122 @@
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
+
+button {
+  background-color: #1a8cff;
+  border: none;
+  color: white;
+  float: right;
+  font-size: 15px;
+  height: 40px;
+  width: 150px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:hover, div#app {
+  background-color: #0047b3;
+  box-shadow: 0 5px 15px 0 rgba(0,0,0,0.16),0 5px 20px 0 rgba(0,0,0,0.12);
+}
+
+button.add {
+  mask: url("../icons/add.svg") no-repeat center;
+  -webkit-mask: url("../icons/add.svg") no-repeat center;
+}
+
+button.delete {
+  mask: url("../icons/delete.svg") no-repeat center;
+  vertical-align: middle;
+  -webkit-mask: url("../icons/delete.svg") no-repeat center;
+}
+
+button.add, button.delete {
+  background-color: #1a8cff;
+  float: none;
+  height: 30px;
+  width: 40px;
+}
+
+button.add:hover, button.delete:hover {
+  background-color: #0047b3;
+  cursor: pointer;
+}
+
+div#app {
+  background-color: #f1f1f1;
+  border-style: none;
+  min-height: 300px;
+  padding: 10px 20px 20px 20px;
+  width: 40%;
+}
+
+div.head {
+  display: table;
+  margin-top: 10px;
+  text-align: center;
+}
+
+div.number {
+  display: inline-block;
+  width: 30px;
+}
+
+.error {
+  background-color: #ffb3b3;
+}
+
+.errorMessage, .infoMessage {
+  margin: 10px 0px;
+  padding:12px;
+}
+
+.errorMessage {
+  background-color: #FFD2D2;
+  color: #D8000C;
+}
+
+.infoMessage {
+  background-color: #BDE5F8;
+  color: #00529B;
+}
+
+input {
+  border-color: #80ccff;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 20px;
+  height: 30px;
+}
+
+input:focus, input:hover {
+  background-color: #ffffcc;
+}
+
+h1 {
+  font-size: 20px;
+  height: 50px;
+}
+
+h2 {
+  display: table-cell;
+  font-size: 20px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+::-ms-input-placeholder {
+  color: #d1d1e0;
+}
+
+::placeholder {
+  color: #d1d1e0;
+}
+
+.w3 {
+  height: 30px;
+  margin-right: 20px;
+  width: 30%;
+}
