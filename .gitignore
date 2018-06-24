@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/java,grunt,maven,eclipse
 
 ### Project specific ###
+node
 node_modules
 src/main/resources/static/scripts/vendor
 
