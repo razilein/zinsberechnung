@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.sg.tools.zinsberechnung.model.Zinsberechnung;
+import de.sg.tools.zinsberechnung.model.ZinsberechnungModel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,10 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 public class ZinsberechnungRestController {
 
     @PostMapping("/berechnen")
-    public String berechnen(@RequestBody final Zinsberechnung zinsberechnung) {
-        log.info(zinsberechnung.toString());
-        // TODO - Zinsberechnung anhängen
-        return "19,11 EUR";
+    public String berechnen(@RequestBody final ZinsberechnungModel model) {
+        log.info(model.toString());
+        return ZinsberechnungService.berechnen(model).toString();
     }
 
 }

@@ -1,6 +1,6 @@
 package de.sg.tools.zinsberechnung.model;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -11,12 +11,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Zinsberechnung extends BaseObject {
+public class ZinsberechnungModel extends BaseObject {
 
-    private BigDecimal zinssatz;
+    private LocalDate berechnungsEnde;
 
     private List<Zahlung> zahlungen;
 
     private List<Sollaenderung> sollaenderungen;
+
+    private Zinstyp zinstyp;
 
 }
