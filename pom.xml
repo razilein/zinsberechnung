@@ -29,6 +29,11 @@
             <artifactId>zinsberechnung-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>de.data_team.commons</groupId>
+            <artifactId>datateam-commons-util</artifactId>
+            <version>67-SNAPSHOT</version>
+        </dependency>
         
         <dependency>
             <groupId>ch.qos.logback</groupId>

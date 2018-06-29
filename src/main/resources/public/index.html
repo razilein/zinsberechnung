@@ -24,10 +24,37 @@
       </div>
       
       <button v-on:click="clickBerechnen">Berechnen</button>
+      <h3>Zinstyp</h3>
+      <input class="w3" id="zinstyp_abrunden" placeholder="abrunden auf" title="abrunden auf" step=".01" type="number" v-model="model.zinstyp.abrundenAuf" />
+      
+      <select class="w3" title="Rechenweise" v-model="model.zinstyp.rechenweise">
+        <option v-for="(key, value) in enums['rechenweise']" v-bind:value="key">
+          {{ value }}
+        </option>
+      </select>
+      <select class="w3" title=Zinsmethode v-if="model.zinstyp.rechenweise == '3'" v-model="model.zinstyp.zinsmethode">
+        <option v-for="(key, value) in enums['zinsmethode']" v-bind:value="key">
+          {{ value }}
+        </option>
+      </select>
+      <br>
+
+      <div class="head">
+         <button class="add" title="Neue Zahlung hinzuf&uuml;gen" v-on:click="addZinssatz"></button>
+         <h2>Zinss&auml;tze</h2>
+      </div>
+      <div v-for="(zinssatz, index) in model.zinstyp.zinssaetze" v-bind:id="getIdZinssatz(index)">
+        <div class="number">{{index + 1}}.</div>
+        <input class="w3" placeholder="Jahreszins" title="Jahreszins" step=".01" type="number" v-model="model.zinstyp.zinssaetze[index].jahreszins" />
+        <input class="w3" placeholder="Gültig ab" title="Gültig ab" step=".01" type="date" v-model="model.zinstyp.zinssaetze[index].gueltigAb" />
+        <input class="w3" placeholder="Gültig bis" title="Gültig bis" step=".01" type="date" v-model="model.zinstyp.zinssaetze[index].gueltigBis" />
+        <button class="delete" title="Diesen Zinssatz l&ouml;schen" v-on:click="deleteZinssatz(index)"></button>
+      </div>
+      
       <h1>Forderung</h1>
       <input class="w3" id="forderung_betrag" placeholder="Betrag" step=".01" type="number" v-model="model.betrag" />
       <input class="w3" id="forderung_datum" placeholder="F&auml;lligkeit" type="date" v-model="model.datum" />
-      <input class="w3" id="forderung_zinssatz" placeholder="Zinssatz" step=".01" type="number" v-model="model.zinssatz" />
+      <input class="w3" id="forderung_berechnungsEnde" placeholder="F&auml;lligkeit" type="date" v-model="model.berechnungsEnde" />
       <br>
 
       <div class="head">

@@ -2,6 +2,9 @@ package de.sg.tools.zinsberechnung.rest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,7 @@ import de.data_team.commons.avviso.model.Zinssatz;
 import de.data_team.commons.avviso.model.Ztyp;
 import de.data_team.commons.avviso.model.types.Rechenweise;
 import de.data_team.commons.avviso.model.types.Zinsmethode;
+import de.data_team.commons.util.MoreCollectors;
 import de.data_team.zinsberechnung.Zinsberechnung;
 import de.data_team.zinsberechnung.model.Zinsprotokoll;
 import de.sg.tools.zinsberechnung.model.ZinsberechnungModel;
@@ -50,6 +54,23 @@ public class ZinsberechnungService {
         result.setZinsmethode(zinstyp.getZinsmethode() == null ? Zinsmethode.T_30_J_360 : zinstyp.getZinsmethode());
 
         return result;
+    }
+
+    public static Map<String, Map<String, Object>> getEnumValues() {
+        final Map<String, Map<String, Object>> result = new HashMap<>();
+        result.put("rechenweise", getRechenweise());
+        result.put("zinsmethode", getZinsmethode());
+        return result;
+    }
+
+    private static Map<String, Object> getRechenweise() {
+        return Arrays.stream(Rechenweise.values())
+                .collect(MoreCollectors.toLinkedMap(Rechenweise::getDescription, Rechenweise::getCode));
+    }
+
+    private static Map<String, Object> getZinsmethode() {
+        return Arrays.stream(Zinsmethode.values())
+                .collect(MoreCollectors.toLinkedMap(Zinsmethode::getDescription, Zinsmethode::getCode));
     }
 
 }

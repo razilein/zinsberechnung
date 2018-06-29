@@ -3,13 +3,28 @@ var app = new Vue({
   data: {
     errorFields: [],
     model: {
-      betrag: 0.00,
+      betrag: null,
       datum: null,
-      zinssatz: '4.12',
+      berechnungsEnde: null,
       zahlungen: [],
-      sollaenderungen: []
+      sollaenderungen: [],
+      zinstyp: {
+        abrundenAuf: '50',
+        zinssaetze: [ {
+          jahreszins: '7.5',
+          gueltigAb: '2000-01-01',
+          gueltigBis: '2020-12-31',
+        } ]
+      },
     },
-    result: null
+    result: null,
+    enums: {}
+  },
+  created: function() {
+    axios.get('/enums')
+    .then(function(response) {
+      app.enums = response.data;
+    });
   },
   methods: {
 
@@ -33,9 +48,6 @@ var app = new Vue({
       }
       if (!this.model.datum) {
         this.errorFields.push('forderung_datum');
-      }
-      if (!this.model.zinssatz || this.model.zinssatz < 0) {
-        this.errorFields.push('forderung_zinssatz');
       }
       app.validateList(this.model.zahlungen, 'zahlung');
       app.validateList(this.model.sollaenderungen, 'sollaenderung');
@@ -106,6 +118,22 @@ var app = new Vue({
 
     getIdSollaenderung: function(index) {
       return 'sollaenderung_' + index;
+    },
+
+    addZinssatz: function() {
+      this.model.zinstyp.zinssaetze.push({
+        jahreszins: null,
+        gueltigAb: null,
+        gueltigBis: null
+      });
+    },
+
+    deleteZinssatz: function(index) {
+      this.model.zinstyp.zinssaetze.splice(index, 1);
+    },
+
+    getIdZinssatz: function(index) {
+      return 'zinssatz_' + index;
     },
 
   }
